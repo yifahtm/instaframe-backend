@@ -1,9 +1,9 @@
-const storyService = require('./story.service.js')
-const socketService = require('../../services/socket.service.js')
-const logger = require('../../services/logger.service')
-const asyncLocalStorage = require('../../services/als.service.js')
+import { storyService } from './story.service.js'
+import { socketService } from '../../services/socket.service.js'
+import { logger } from '../../services/logger.service.js'
+import { asyncLocalStorage } from '../../services/als.service.js'
 
-async function getStories(req, res) {
+export async function getStories(req, res) {
     try {
         const stories = await storyService.query(req.query)
         res.send(stories)
@@ -13,7 +13,7 @@ async function getStories(req, res) {
     }
 }
 
-async function getStoryById(req, res) {
+export async function getStoryById(req, res) {
     try {
         const storyId = req.params.id
         const story = await storyService.getStoryById(storyId)
@@ -24,7 +24,7 @@ async function getStoryById(req, res) {
     }
 }
 
-async function addStory(req, res) {
+export async function addStory(req, res) {
     try {
         const story = req.body
         // car.owner = loggedinUser
@@ -37,7 +37,7 @@ async function addStory(req, res) {
 }
 
 
-async function updateStory(req, res) {
+export async function updateStory(req, res) {
     try {
         const story = req.body
         const updatedStory = await storyService.update(story)
@@ -50,7 +50,7 @@ async function updateStory(req, res) {
     }
 }
 
-async function storyNotification(req, res) {
+export async function storyNotification(req, res) {
     console.log('here')
     try {
         const story = req.body
@@ -63,7 +63,7 @@ async function storyNotification(req, res) {
     }
 }
 
-async function removeStory(req, res) {
+export async function removeStory(req, res) {
     try {
         const storyId = req.params.id
         const removedId = await storyService.remove(storyId)
@@ -74,11 +74,3 @@ async function removeStory(req, res) {
     }
 }
 
-module.exports = {
-    getStories,
-    getStoryById,
-    addStory,
-    updateStory,
-    removeStory,
-    storyNotification
-}

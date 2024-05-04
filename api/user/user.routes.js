@@ -1,19 +1,16 @@
-const express = require('express')
-// const {requireAuth, requireAdmin} = require('../../middlewares/requireAuth.middleware')
-const { getUser, getUsers, deleteUser, addUser, updateUser } = require('./user.controller')
-const router = express.Router()
+import express from 'express'
+
+import { requireAuth, requireAdmin } from '../../middlewares/requireAuth.middleware.js'
+import { getUser, getUsers, deleteUser, updateUser } from './user.controller.js'
+
+export const userRoutes = express.Router()
 
 // middleware that is specific to this router
-// router.use(requireAuth)
+// userRoutes.use(requireAuth)
 
-router.get('/', getUsers)
-router.get('/:id', getUser)
-// router.put('/:id', requireAuth,  updateUser)
-router.put('/:id', updateUser)
-router.post('/', addUser)
+userRoutes.get('/', getUsers)
+userRoutes.get('/:id', getUser)
+userRoutes.put('/:id', updateUser)
 
-router.delete('/:id', deleteUser)
+userRoutes.delete('/:id', deleteUser)
 // router.delete('/:id',  requireAuth, requireAdmin, deleteUser)
-
-module.exports = router
-module.exports = router

@@ -1,7 +1,7 @@
-const authService = require('../api/auth/auth.service')
-const asyncLocalStorage = require('../services/als.service')
+import { authService } from '../api/auth/auth.service.js'
+import { asyncLocalStorage } from '../services/als.service.js'
 
-async function setupAsyncLocalStorage(req, res, next) {
+export async function setupAsyncLocalStorage(req, res, next) {
     const storage = {}
     asyncLocalStorage.run(storage, () => {
         if (!req.cookies) return next()
@@ -15,4 +15,3 @@ async function setupAsyncLocalStorage(req, res, next) {
     })
 }
 
-module.exports = setupAsyncLocalStorage

@@ -1,8 +1,9 @@
-const dbService = require('../../services/db.service')
-const logger = require('../../services/logger.service')
-const ObjectId = require('mongodb').ObjectId
-const asyncLocalStorage = require('../../services/als.service')
+import mongodb from 'mongodb'
+const { ObjectId } = mongodb
 
+import { dbService } from '../../services/db.service.js'
+import { logger } from '../../services/logger.service.js'
+import { utilService } from '../../services/util.service.js'
 
 const DB_NAME = 'story'
 
@@ -68,16 +69,39 @@ async function remove(storyId) {
     }
 }
 
+// async function addMsg(storyId, msg) {
+//     try {
+//         msg.id = utilService.makeId()
+//         const collection = await dbService.getCollection('toy')
+//         await collection.updateOne({ _id: ObjectId(storyId) }, { $push: { msgs: msg } })
+//         return msg
+//     } catch (err) {
+//         logger.error(`cannot add story msg ${storyId}`, err)
+//         throw err
+//     }
+// }
+
+// async function removeMsg(toyId, msgId) {
+//     try {
+//         const collection = await dbService.getCollection('toy')
+//         await collection.updateOne({ _id: ObjectId(toyId) }, { $pull: { msgs: { id: msgId } } })
+//         return msgId
+//     } catch (err) {
+//         logger.error(`cannot add toy msg ${toyId}`, err)
+//         throw err
+//     }
+// }
+
 function _buildCriteria(filterBy) {
     const criteria = {}
     if (filterBy.byUserId) criteria.byUserId = filterBy.byUserId
     return criteria
 }
 
-module.exports = {
+export const storyService = {
+    remove,
     query,
     getStoryById,
     add,
     update,
-    remove
 }

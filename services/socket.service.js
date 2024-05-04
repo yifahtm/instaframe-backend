@@ -1,6 +1,18 @@
-const logger = require('./logger.service')
+import { logger } from './logger.service.js'
 
 var gIo = null
+
+export const socketService = {
+    // set up the sockets service and define the API
+    setupSocketAPI,
+    // emit to everyone / everyone in a specific room (label)
+    emitTo,
+    // emit to a specific user (if currently active in system)
+    emitToUser,
+    // Send to all sockets BUT not the current socket - if found
+    // (otherwise broadcast to a room / to all)
+    broadcast,
+}
 
 function setupSocketAPI(http) {
     gIo = require('socket.io')(http, {
@@ -134,14 +146,3 @@ function _printSocket(socket) {
     console.log(`Socket - socketId: ${socket.id} userId: ${socket.userId}`)
 }
 
-module.exports = {
-    // set up the sockets service and define the API
-    setupSocketAPI,
-    // emit to everyone / everyone in a specific room (label)
-    emitTo,
-    // emit to a specific user (if currently active in system)
-    emitToUser,
-    // Send to all sockets BUT not the current socket - if found
-    // (otherwise broadcast to a room / to all)
-    broadcast,
-}

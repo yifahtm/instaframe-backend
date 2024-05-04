@@ -1,10 +1,6 @@
-const logger = require('../services/logger.service')
+import { logger } from '../services/logger.service.js'
 
-async function log(req, res, next) {
-    // logger.info('Sample Logger Middleware')
+export async function log(req, res, next) {
+    logger.info('Req was made', req.route.path)
     next()
-}
-
-module.exports = {
-    log
 }

@@ -1,10 +1,10 @@
-var config
+import configDev from './dev.js'
+
+export var config
 
 if (process.env.NODE_ENV === 'production') {
-    config = require('./prod')
+    config = configProd
 } else {
-    config = require('./dev')
+    config = configDev
 }
 config.isGuestMode = true
-
-module.exports = config
