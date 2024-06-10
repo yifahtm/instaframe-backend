@@ -1,8 +1,8 @@
 import mongodb from 'mongodb'
-const { ObjectId } = mongodb
+import { ObjectId } from 'mongodb';
 
 import { dbService } from '../../services/db.service.js'
-import { logger } from '../../services/logger.service.js'
+// import { logger } from '../../services/logger.service.js'
 import { utilService } from '../../services/util.service.js'
 
 const DB_NAME = 'story'
@@ -10,12 +10,14 @@ const DB_NAME = 'story'
 async function query(filterBy = {}) {
     try {
         // const criteria = _buildCriteria(filterBy)
+
         const collection = await dbService.getCollection(DB_NAME)
+        console.log(collection)
         const stories = await collection.find().toArray()
 
         return stories
     } catch (err) {
-        logger.error('cannot find stories', err)
+        // logger.error('cannot find stories', err)
         throw err
     }
 }
@@ -23,8 +25,9 @@ async function query(filterBy = {}) {
 async function getStoryById(storyId) {
     try {
         // const criteria = _buildCriteria(filterBy)
+        console.log(typeof storyId)
         const collection = await dbService.getCollection(DB_NAME)
-        const story = await collection.findOne({ _id: ObjectId(storyId) })
+        const story = await collection.findOne({ _id: new ObjectId(storyId) })
 
         return story
     } catch (err) {

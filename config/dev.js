@@ -1,4 +1,4 @@
 export default {
-    dbURL: 'mongodb+srv://yifaht:2S2s2s2s2s2s2s@cluster0.crpigkg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+    dbURL: 'mongodb+srv://yifaht:yifaht1234@instaframedb.hdhpbyr.mongodb.net/?retryWrites=true&w=majority&appName=InstaframeDB',
     dbName: 'Instaframe_db',
 }
